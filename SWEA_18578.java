@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-class SWEA_1206_Gravity { // SWEA Gravity 문제
+class SWEA_18578 { // SWEA Gravity 문제
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;

@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 /.idea/
 /.iml/
+/Solving.java/
 =======
 echo ".idea/" > .gitignore
 echo "out/" >> .gitignore
