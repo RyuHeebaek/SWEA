@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 /.idea/
 /.iml/
+=======
+echo ".idea/" > .gitignore
+echo "out/" >> .gitignore
+echo "*.iml" >> .gitignore
+>>>>>>> 4330b0b6ef8157dcf0ce76f90e7858bd7bf9e6d6
