@@ -1,109 +1,113 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-class SWEA_1767 {
+public class SWEA_1767 {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
 
-    static int[] dx = {-1, 1, 0, 0};
-    static int[] dy = {0, 0, -1, 1};
+    static int[] dx = {1, 0, -1, 0};
+    static int[] dy = {0, 1, 0, -1};
 
-
-    static int N, maxCore, minWire;
-    static List<int[]> cores;
-    static int[][] map;
+    static List<int[]> coreIdx = new ArrayList<>();
+    static int[][] fild;
+    static int N, maxCore, minWire, initialCoreCount;
 
     public static void main(String[] args) throws IOException {
+        StringBuilder sb = new StringBuilder();
 
-        int testCase = Integer.parseInt(br.readLine().trim());
+        int testcases = Integer.parseInt(br.readLine().trim());
 
-        for(int t = 1; t <= testCase; t++) {
-
+        for (int tc = 1; tc <= testcases; tc++) {
             N = Integer.parseInt(br.readLine().trim());
-            map = new int[N][N];
-            cores = new ArrayList<>();
 
-            putValues();
-
+            fild = new int[N][N];
+            coreIdx.clear();
             maxCore = 0;
             minWire = Integer.MAX_VALUE;
+            initialCoreCount = 0;
 
-            dfs(0, 0, 0);
+            putVal();
 
-            System.out.println("#" + t + " " + minWire);
+            dfs(0, initialCoreCount, 0);
+
+            sb.append("#").append(tc).append(" ").append(minWire).append("\n");
         }
 
+        System.out.print(sb);
     }
 
-    public static void putValues() throws IOException {
-        for(int i = 0 ; i < N; i++) {
+    public static void dfs(int index, int coreCount, int wireLength) {
 
-            st = new StringTokenizer(br.readLine().trim());
-
-            for(int j = 0 ; j < N; j++) {
-                map[i][j] = Integer.parseInt(st.nextToken());
-
-                if(map[i][j] == 1){
-                    if(i == 0 || j == 0 || i == N - 1 || j == N - 1) continue;
-                    cores.add(new int[] {i, j});
-
-                }
-            }
+        if (coreCount + (coreIdx.size() - index) < maxCore) {
+            return;
         }
-    }
 
-    static void dfs(int idx, int coreCount, int wireLength) {
-        if(coreCount + (cores.size() - idx) < maxCore) return;
-
-        if(idx == cores.size()) {
-            if(coreCount > maxCore) {
+        if (index == coreIdx.size()) {
+            if (coreCount > maxCore) {
                 maxCore = coreCount;
                 minWire = wireLength;
-            } else if(coreCount == maxCore) {
+            } else if (coreCount == maxCore) {
                 minWire = Math.min(minWire, wireLength);
             }
             return;
         }
 
-        int[] current = cores.get(idx);
-        int x = current[0];
-        int y = current[1];
+        int[] curr = coreIdx.get(index);
+        int r = curr[0];
+        int c = curr[1];
 
-        for(int d = 0; d < 4; d++) {
-            int len = getWireLength(x, y, d);
-
-            if(len > 0) {
-                setStatus(x, y, d, 2);
-                dfs(idx+1, coreCount+1, wireLength + len);
-                setStatus(x, y, d, 0);
+        for (int d = 0; d < 4; d++) {
+            if (canConnect(r, c, d)) {
+                int length = setWire(r, c, d, 2);
+                dfs(index + 1, coreCount + 1, wireLength + length);
+                setWire(r, c, d, 0);
             }
         }
-        dfs(idx + 1, coreCount, wireLength);
+
+        dfs(index + 1, coreCount, wireLength);
     }
 
-    static int getWireLength(int x, int y, int d) {
-        int nx = x + dx[d];
-        int ny = y + dy[d];
-        int count = 0;
+    public static boolean canConnect(int r, int c, int d) {
+        int nx = r + dx[d];
+        int ny = c + dy[d];
 
-        while(nx >= 0 && nx < N && ny >= 0 && ny < N) {
-            if(map[nx][ny] != 0) return 0;
-            count++;
+        while (nx >= 0 && nx < N && ny >= 0 && ny < N) {
+            if (fild[nx][ny] != 0) return false;
             nx += dx[d];
             ny += dy[d];
         }
-        return count;
+        return true;
     }
 
-    static void setStatus(int x, int y, int d, int status) {
-        int nx = x + dx[d];
-        int ny = y + dy[d];
+    public static int setWire(int r, int c, int d, int type) {
+        int length = 0;
+        int nx = r + dx[d];
+        int ny = c + dy[d];
 
-        while(nx >= 0 && ny >= 0 && nx < N && ny < N) {
-            map[nx][ny] = status;
+        while (nx >= 0 && nx < N && ny >= 0 && ny < N) {
+            fild[nx][ny] = type;
+            length++;
             nx += dx[d];
             ny += dy[d];
+        }
+        return length;
+    }
+
+    public static void putVal() throws IOException {
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine().trim());
+            for (int j = 0; j < N; j++) {
+                fild[i][j] = Integer.parseInt(st.nextToken());
+                if (fild[i][j] == 1) {
+
+                    if (i == 0 || i == N - 1 || j == 0 || j == N - 1) {
+                        initialCoreCount++;
+                        continue;
+                    }
+                    coreIdx.add(new int[] {i, j});
+                }
+            }
         }
     }
 }
