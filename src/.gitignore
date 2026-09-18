@@ -6,29 +6,7 @@
 echo ".idea/" > .gitignore
 echo "out/" >> .gitignore
 echo "*.iml" >> .gitignore
->>>>>>> 4330b0b6ef8157dcf0ce76f90e7858bd7bf9e6d6
-/SWEA_08_31_3.class
-/SWEA_0901_1.class
-/SWEA_1206.class
-/SWEA_1208.class
-/SWEA_1209.class
-/SWEA_1209_2.class
-/SWEA_1220.class
-/SWEA_1224.class
-/SWEA_1225.class
-/SWEA_1244.class
-/SWEA_14510.class
-/SWEA_1486.class
-/SWEA_1767.class
-/SWEA_18578.class
-/SWEA_1859.class
-/SWEA_1873.class
-/SWEA_1873_1.class
-/SWEA_2477.class
-/SWEA_27005.class
-/SWEA_2805.class
-/SWEA_2806.class
-/SWEA_3421.class
-/SWEA_5215.class
-/SWEA_5644.class
-/SWEA_5658.class
+
+/.DS_Store/
+/.classpath/
+/.project/
