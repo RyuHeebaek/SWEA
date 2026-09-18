@@ -51,9 +51,9 @@ public class SWEA_1219 {
 		return true;
 	}
 	
-	public static boolean isPalindromeCol(int cal, int s, int e) {
+	public static boolean isPalindromeCol(int col, int s, int e) {
 		while(s < e) {
-			if(fild[s++][cal] != fild[e--][cal]) return false;
+			if(fild[s++][col] != fild[e--][col]) return false;
 		}
 		
 		return true;

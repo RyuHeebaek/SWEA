@@ -7,6 +7,16 @@ echo ".idea/" > .gitignore
 echo "out/" >> .gitignore
 echo "*.iml" >> .gitignore
 
-/.DS_Store/
-/.classpath/
-/.project/
+# OS 생성 파일
+.DS_Store
+
+# 이클립스 설정 파일 및 컴파일 결과물
+.classpath
+.project
+.settings/
+*.class
+bin/
+
+# 인텔리제이 설정 파일
+*.iml
+.idea/
