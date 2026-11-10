@@ -1,22 +1,18 @@
-<<<<<<< HEAD
-/.idea/
-/.iml/
-/Solving.java/
-=======
-echo ".idea/" > .gitignore
-echo "out/" >> .gitignore
-echo "*.iml" >> .gitignore
-
-# OS 생성 파일
+# OS files
 .DS_Store
 
-# 이클립스 설정 파일 및 컴파일 결과물
+# IDE workspace settings
+.idea/
+*.iml
+.metadata/
 .classpath
 .project
 .settings/
+
+# Compiled output
 *.class
+out/
 bin/
 
-# 인텔리제이 설정 파일
-*.iml
-.idea/
+# Local scratch solution
+/Solving.java
